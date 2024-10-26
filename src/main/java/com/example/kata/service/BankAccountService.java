@@ -9,6 +9,8 @@ import com.example.kata.verification.BankAccountVerification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>Classe service contenant la logique metier des opérations sur le compte bancaire</p>
@@ -45,6 +47,11 @@ public class BankAccountService {
         this.saveAccount(account, command, type);
     }
 
+    public List<Transaction> transactions() {
+        Account account = this.bankAccountRepository.getAccount();
+        return account.getTransactions();
+    }
+
     private void saveAccount(Account account, TransactionCommand command, TransactionType type) {
         double amount = command.amount();
         double balance = account.getBalance();
@@ -61,6 +68,6 @@ public class BankAccountService {
     }
 
     private Transaction generateTransaction(TransactionType type, double amount, double balance) {
-        return new Transaction(LocalDate.now(), type, amount, balance);
+        return new Transaction(LocalDateTime.now(), type, amount, balance);
     }
 }

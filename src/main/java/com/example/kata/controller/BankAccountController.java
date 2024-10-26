@@ -1,9 +1,13 @@
 package com.example.kata.controller;
 
 import com.example.kata.dto.TransactionCommand;
+import com.example.kata.model.Transaction;
 import com.example.kata.service.BankAccountService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>Classe représentant les services API du compte bancaire.</p>
@@ -30,5 +34,11 @@ public class BankAccountController {
     @ResponseStatus(HttpStatus.OK)
     public void withdraw(@RequestBody TransactionCommand command) {
         bankAccountService.withdraw(command);
+    }
+
+    @GetMapping("/statement")
+    public ResponseEntity<List<Transaction>> statement() {
+        List<Transaction> transactions = bankAccountService.transactions();
+        return ResponseEntity.ok(transactions);
     }
 }
