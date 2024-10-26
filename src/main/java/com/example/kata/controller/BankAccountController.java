@@ -25,4 +25,10 @@ public class BankAccountController {
     public void deposit(@RequestBody TransactionCommand command) {
         bankAccountService.deposit(command);
     }
+
+    @PostMapping("/withdraw")
+    @ResponseStatus(HttpStatus.OK)
+    public void withdraw(@RequestBody TransactionCommand command) {
+        bankAccountService.withdraw(command);
+    }
 }

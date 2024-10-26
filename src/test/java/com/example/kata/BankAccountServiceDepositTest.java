@@ -26,9 +26,6 @@ public class BankAccountServiceDepositTest {
     void setUp() {
         this.bankAccountRepository = new BankAccountRepository();
         this.bankAccountService = new BankAccountService(this.bankAccountRepository);
-
-        // TODO: 26/10/2024 test avec la valeur 0 dans la commande
-        // TODO: 26/10/2024 test avec la valeur > 0 dans la commande
     }
 
     @Test

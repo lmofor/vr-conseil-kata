@@ -32,11 +32,21 @@ public class BankAccountService {
 
         this.bankAccountVerification.checkDepositAmount(command);
 
-        double amount = command.amount();
-        this.saveAccount(account, amount, type);
+        this.saveAccount(account, command, type);
     }
 
-    private void saveAccount(Account account, double amount, TransactionType type) {
+    public void withdraw(TransactionCommand command) {
+        Account account = this.bankAccountRepository.getAccount();
+        TransactionType type = TransactionType.WITHDRAWAL;
+
+        this.bankAccountVerification.checkDepositAmount(command);
+        this.bankAccountVerification.checkAccountBalanceIsSufficient(account, command);
+
+        this.saveAccount(account, command, type);
+    }
+
+    private void saveAccount(Account account, TransactionCommand command, TransactionType type) {
+        double amount = command.amount();
         double balance = account.getBalance();
         double newBalance = this.calculateNewAccountBalance(balance, amount, type);
         Transaction transaction = this.generateTransaction(type, amount, newBalance);

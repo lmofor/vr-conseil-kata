@@ -25,8 +25,8 @@ public class BankAccountVerification {
         }
     }
 
-    public void checkAccountBalanceIsSufficient(Account account, double amount) {
-        if (account.getBalance() < amount) {
+    public void checkAccountBalanceIsSufficient(Account account, TransactionCommand command) {
+        if (account.getBalance() < command.amount()) {
             throw new TransactionException("The account balance is insufficient !");
         }
     }
