@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class BankAccountServiceStatementTest {
     void testToGetStatement() {
         //Given
         Account account = this.bankAccountRepository.getAccount();
-        Transaction transaction = new Transaction(LocalDateTime.now(), TransactionType.DEPOSIT, 1000, 1000);
+        Transaction transaction = new Transaction(LocalDate.now(), TransactionType.DEPOSIT, 1000, 1000);
         account.getTransactions().add(transaction);
 
         //When

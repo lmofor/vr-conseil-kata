@@ -9,7 +9,6 @@ import com.example.kata.verification.BankAccountVerification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -68,6 +67,6 @@ public class BankAccountService {
     }
 
     private Transaction generateTransaction(TransactionType type, double amount, double balance) {
-        return new Transaction(LocalDateTime.now(), type, amount, balance);
+        return new Transaction(LocalDate.now(), type, amount, balance);
     }
 }
