@@ -28,19 +28,19 @@ public class BankAccountService {
 
     public void deposit(TransactionCommand command) {
         Account account = this.bankAccountRepository.getAccount();
-        double balance = account.getBalance();
-        double amount = command.amount();
         TransactionType type = TransactionType.DEPOSIT;
 
         this.bankAccountVerification.checkDepositAmount(command);
 
+        double amount = command.amount();
+        this.saveAccount(account, amount, type);
+    }
+
+    private void saveAccount(Account account, double amount, TransactionType type) {
+        double balance = account.getBalance();
         double newBalance = this.calculateNewAccountBalance(balance, amount, type);
         Transaction transaction = this.generateTransaction(type, amount, newBalance);
 
-        this.saveAccount(newBalance, account, transaction);
-    }
-
-    private void saveAccount(double newBalance, Account account, Transaction transaction) {
         account.setBalance(newBalance);
         account.getTransactions().add(transaction);
     }

@@ -2,6 +2,7 @@ package com.example.kata.verification;
 
 import com.example.kata.dto.TransactionCommand;
 import com.example.kata.exception.TransactionException;
+import com.example.kata.model.Account;
 
 import java.util.Objects;
 
@@ -24,8 +25,8 @@ public class BankAccountVerification {
         }
     }
 
-    public void checkAccountBalanceIsSufficient(double balance, double amount) {
-        if (balance < amount) {
+    public void checkAccountBalanceIsSufficient(Account account, double amount) {
+        if (account.getBalance() < amount) {
             throw new TransactionException("The account balance is insufficient !");
         }
     }
